@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link rel="stylesheet" href="style.css" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BLUE OS | Ultimate AI Desktop</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div id="wallpaper-layer">
+      <video autoplay loop muted playsinline id="wallpaper-video">
+        <source
+          src="https://assets.mixkit.co/videos/preview/mixkit-blue-abstract-waves-1164-large.mp4"
+          type="video/mp4"
+        />
+      </video>
+    </div>
+    <div class="vignette-overlay"></div>
+
+    <div id="snap-preview"></div>
+
+    <div class="drop-zone" id="dropZone">
+      <i class="fas fa-cloud-upload-alt"></i>
+      <p>Drop files here to add to desktop</p>
+    </div>
+
+    <div id="desktop-zone"></div>
+
+    <div id="ai-orb-container" class="orb-center">
+      <div class="orb-visual">
+        <div class="orb-ring-outer"></div>
+        <div class="orb-ring-inner"></div>
+        <div class="orb-core"></div>
+      </div>
+      <div class="orb-status" id="orb-text">BLUE OS INITIALIZED</div>
+    </div>
+
+    <div class="glass-dock">
+      <div
+        class="dock-app"
+        onclick="BlueOS.openApp('browser')"
+        title="Google Search"
+      >
+        <i class="fab fa-google"></i>
+      </div>
+      <div
+        class="dock-app"
+        onclick="BlueOS.openApp('terminal')"
+        title="Terminal"
+      >
+        <i class="fas fa-terminal"></i>
+      </div>
+      <div class="dock-app" onclick="BlueOS.openApp('notepad')" title="Notepad">
+        <i class="fas fa-file-alt"></i>
+      </div>
+      <div
+        class="dock-app"
+        onclick="BlueOS.openApp('calculator')"
+        title="Calculator"
+      >
+        <i class="fas fa-calculator"></i>
+      </div>
+      <div class="dock-app" onclick="BlueOS.openApp('photos')" title="Photos">
+        <i class="fas fa-image"></i>
+      </div>
+      <div
+        class="dock-app"
+        onclick="BlueOS.openApp('appstore')"
+        title="App Studio"
+      >
+        <i class="fas fa-plus-circle"></i>
+      </div>
+      <div
+        class="dock-app"
+        onclick="BlueOS.openApp('settings')"
+        title="Settings"
+      >
+        <i class="fas fa-cog"></i>
+      </div>
+      <div class="dock-separator"></div>
+      <div
+        class="dock-app"
+        style="color: #e74c3c"
+        onclick="BlueOS.shutdown()"
+        title="Shutdown"
+      >
+        <i class="fas fa-power-off"></i>
+      </div>
+    </div>
+
+    <div class="sys-tray">
+      <i class="fas fa-wifi"></i>
+      <span id="sys-clock">00:00</span>
+    </div>
+
+    <div class="wallpaper-modal" id="wallpaperModal">
+      <div class="wallpaper-picker">
+        <h2>Choose Your Wallpaper</h2>
+        <div class="wallpaper-grid">
+          <div
+            class="wallpaper-option video"
+            onclick="BlueOS.setWallpaper('https://assets.mixkit.co/videos/preview/mixkit-blue-abstract-waves-1164-large.mp4', 'video')"
+          ></div>
+          <div
+            class="wallpaper-option"
+            style="
+              background-image: url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=500');
+            "
+            onclick="BlueOS.setWallpaper('https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=1920', 'image')"
+          ></div>
+          <div
+            class="wallpaper-option"
+            style="
+              background-image: url('https://images.unsplash.com/photo-1534972195531-d756b9bfa9f2?w=500');
+            "
+            onclick="BlueOS.setWallpaper('https://images.unsplash.com/photo-1534972195531-d756b9bfa9f2?w=1920', 'image')"
+          ></div>
+          <div
+            class="wallpaper-option"
+            style="
+              background-image: url('https://images.unsplash.com/photo-1518770660439-4636190af475?w=500');
+            "
+            onclick="BlueOS.setWallpaper('https://images.unsplash.com/photo-1518770660439-4636190af475?w=1920', 'image')"
+          ></div>
+          <div
+            class="wallpaper-option"
+            style="
+              background-image: url('https://images.unsplash.com/photo-1419242902214-272b3f66ee7a?w=500');
+            "
+            onclick="BlueOS.setWallpaper('https://images.unsplash.com/photo-1419242902214-272b3f66ee7a?w=1920', 'image')"
+          ></div>
+          <div
+            class="wallpaper-option"
+            style="
+              background-image: url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=500');
+            "
+            onclick="BlueOS.setWallpaper('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1920', 'image')"
+          ></div>
+        </div>
+        <div class="upload-section">
+          <input
+            type="file"
+            id="wallpaperUpload"
+            accept="image/*,video/*"
+            style="display: none"
+            onchange="BlueOS.uploadWallpaper(event)"
+          />
+          <button
+            class="upload-btn"
+            onclick="document.getElementById('wallpaperUpload').click()"
+          >
+            <i class="fas fa-upload"></i> Upload Custom Wallpaper
+          </button>
+          <button
+            class="upload-btn close-modal-btn"
+            onclick="BlueOS.closeWallpaperPicker()"
+          >
+            Close
+          </button>
+        </div>
+      </div>
+    </div>
+    <script src="script.js"></script>
+  </body>
+</html>
